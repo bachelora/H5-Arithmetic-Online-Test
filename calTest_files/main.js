@@ -13,15 +13,60 @@ function randomNum(minNum,maxNum){
     } 
 } 
 
-function generateContent(number){
+function generateContent(number,maxNum,fangfa){
 	var content = []
 
 	for (var i=0;i<number;i++){ 
-		var a = randomNum(10,5000)
-		var b = randomNum(10,5000)
+		var a = randomNum(1,maxNum)
+		var b = randomNum(1,maxNum)
 		//var c = randomNum(10,10000)
-		var result =  a * b
-		var str = "" + a + "×" + b
+		var result = 0
+		var str = ""
+		switch(fangfa){
+			case '1'://两数加法
+			   result = a + b;
+			   str = "" + a + "+" + b
+			   break;
+			case '2'://两数减法
+			   result = a + b;
+			   str = "" + result + "-" + a
+			   result = result - a
+			   break;
+			 case '3'://两数加减
+			    if (randomNum(0,1) == 1) {
+			    	result = a + b;
+			        str = "" + result + "-" + a
+			        result = result - a
+
+			    }else{
+                     result = a + b;
+		    	     str = "" + a + "+" + b
+			    }
+			   break;
+			  case '4'://两数乘法
+			   result = a * b;
+			   str = "" + a + "x" + b
+			   break;
+			  case '5'://两数除法
+			   result = a * b;
+			   str = "" + result + "÷" + a
+			   result = b
+			   break;
+			  case '6'://两数乘除
+			    if (randomNum(0,1) == 1) {
+			    	result = a * b;
+			        str = "" + a + "x" + b
+
+			    }else{
+                    result = a * b;
+			        str = "" + result + "÷" + a
+			        result = b 
+			    }
+
+			  break;
+
+			default:break;
+		}
 
 		var li = '<li style="width: 378px;">' + str + '＝ <input style="width:70px;" type="text" size="2" zqda="' + result + '" ><span class="daan_show"></span> <i class="s_jieguo">' +result +'</i></li>'
 		content.push(li)
@@ -48,7 +93,14 @@ function js_tishu_onchange(){
 	var sj_tishu=document.getElementById("sj_tishu");
 	var index=sj_tishu.selectedIndex
 	var value = sj_tishu.options[index].value
-	generateContent(value)
+
+	var sj_fanwei = document.getElementById("sj_fanwei");
+	var maxNum = sj_fanwei.options[sj_fanwei.selectedIndex].value
+
+	var sj_fangfa= document.getElementById("sj_fangfa");
+	var fangfa = sj_fangfa.options[sj_fangfa.selectedIndex].value
+
+	generateContent(value,maxNum,fangfa)
 
 	fenPenTi = 100/value
 	var jst_dibu_tishi = document.getElementById("jst_dibu_tishi");
@@ -92,3 +144,6 @@ function js_huanjuan(){
 	js_tishu_onchange()
 }
 
+function js_fanwei_onchange(){
+	js_tishu_onchange()
+}
