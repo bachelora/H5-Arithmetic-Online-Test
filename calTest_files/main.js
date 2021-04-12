@@ -79,9 +79,15 @@ function generateContent(number,maxNum,fangfa){
 var startDate = 0
 var fenPenTi = 0
 
+var timerId = null
+
 function js_tishu_onchange(){
 	startDate = new Date()
-	var timer = setInterval(function() {
+	if (timerId != null) {
+		clearInterval(timerId)
+		timerId = null
+	}
+	timerId = setInterval(function() {
 		var currentDate = new Date()
 		t = currentDate.getTime() - startDate.getTime()
 		var min = Math.floor(t/1000/60)
@@ -138,6 +144,11 @@ function shengchengjisuanti_2(){
 	}
 	var jst_defen =  document.getElementById("jst_defen")
 	jst_defen.innerHTML = '00' + total + '分'
+
+	if (timerId != null) {
+		clearInterval(timerId)
+		timerId = null
+	}
 }
 
 function js_huanjuan(){
