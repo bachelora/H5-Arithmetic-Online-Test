@@ -188,8 +188,8 @@ function js_tishu_onchange(){
 	generateContent(value,maxNum,fangfa)
 
 	fenPenTi = 100/value
-	var jst_dibu_tishi = document.getElementById("jst_dibu_tishi");
-	jst_dibu_tishi.innerHTML = '※总分：100分， 共计：' + value +'道题， 每题：' + fenPenTi + '分。'
+	var jst_dibu_tishi = document.getElementById("jst_dibu_tishi"); 
+	jst_dibu_tishi.innerHTML = '※总分：100分， 共计：' + value +'道题， 每题：' + Math.round(fenPenTi) + '分。'
 }
 
 function shengchengjisuanti_2(){
@@ -222,7 +222,7 @@ function shengchengjisuanti_2(){
 		}
 	}
 	var jst_defen =  document.getElementById("jst_defen")
-	jst_defen.innerHTML = '00' + total + '分'
+	jst_defen.innerHTML = '' + Math.round(total) + '分'
 
 	if (timerId != null) {
 		clearInterval(timerId)
